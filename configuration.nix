@@ -89,7 +89,12 @@
   environment.systemPackages = with pkgs; with pkgs.gitAndTools; with pkgs.gnome3; [
     git git-extras gh
     google-chrome
-    vscode
+
+    (vscode-with-extensions.override {
+      vscodeExtensions = with pkgs.vscode-extensions; [
+        ms-vsliveshare.vsliveshare
+      ];
+    })
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
