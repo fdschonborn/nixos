@@ -36,6 +36,8 @@
     keyMap = "la-latin1";
   };
 
+  fonts.fontconfig.cache32Bit = true;
+
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
@@ -53,6 +55,9 @@
   # Enable sound.
   sound.enable = true;
   hardware.pulseaudio.enable = true;
+  hardware.pulseaudio.support32Bit = true;
+
+  hardware.opengl.driSupport32Bit = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
@@ -86,6 +91,9 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  programs.steam.enable = true;
+  hardware.steam-hardware.enable = true;
 
   # List services that you want to enable:
 
