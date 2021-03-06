@@ -86,9 +86,13 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; with pkgs.gitAndTools; with pkgs.gnome3; [
+  environment.systemPackages = with pkgs; with pkgs.gitAndTools; with pkgs.gnome3; with pkgs.gnomeExtensions; [
     git git-extras gh
     google-chrome
+
+    gsconnect
+    impatience
+    appindicator
 
     (vscode-with-extensions.override {
       vscodeExtensions = with pkgs.vscode-extensions; [
