@@ -73,8 +73,10 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; [
+  environment.systemPackages = with pkgs; with pkgs.gitAndTools; with pkgs.gnome3; [
+    git git-extras gh
     google-chrome
+    vscode
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
