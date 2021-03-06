@@ -15,6 +15,9 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.plymouth.enable = true;
   boot.plymouth.theme = "spinner";
+  boot.extraModprobeConfig = "
+    options bluetooth disable_ertm=1
+  ";
 
   boot.supportedFilesystems = ["exfat" "ntfs"];
 
@@ -58,6 +61,11 @@
   hardware.pulseaudio.support32Bit = true;
 
   hardware.opengl.driSupport32Bit = true;
+
+  hardware.bluetooth = {
+    enable = true;
+    package = pkgs.bluezFull;
+  };
 
   # Enable touchpad support (enabled default in most desktopManager).
   services.xserver.libinput.enable = true;
