@@ -66,6 +66,11 @@
 
   nixpkgs.config.allowUnfree = true;
 
+  environment.gnome3.excludePackages = with pkgs; with pkgs.gnome3; [
+    epiphany
+    gnome-connections
+  ];
+
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
