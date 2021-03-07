@@ -89,6 +89,11 @@
   environment.systemPackages = with pkgs; with pkgs.gitAndTools; with pkgs.gnome3; with pkgs.gnomeExtensions; [
     git git-extras gh
     google-chrome
+    spotify
+    retroarch
+    tdesktop
+    discord
+    minecraft
 
     gsconnect
     impatience
