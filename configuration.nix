@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -19,7 +20,7 @@
     options bluetooth disable_ertm=1
   ";
 
-  boot.supportedFilesystems = ["exfat" "ntfs"];
+  boot.supportedFilesystems = [ "exfat" "ntfs" ];
 
   networking.hostName = "Swift-SF314-52"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -35,7 +36,7 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "es_AR.UTF-8";
   console = {
-  #   font = "Lat2-Terminus16";
+    #   font = "Lat2-Terminus16";
     keyMap = "la-latin1";
   };
 
@@ -86,25 +87,49 @@
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
-  environment.systemPackages = with pkgs; with pkgs.gitAndTools; with pkgs.gnome3; with pkgs.gnomeExtensions; [
-    git git-extras gh
-    google-chrome
-    spotify
-    retroarch
-    tdesktop
-    discord
-    minecraft
+  environment.systemPackages =
+    with pkgs;
+    with pkgs.gitAndTools;
+    with pkgs.gnome3;
+    with pkgs.gnomeExtensions;
+    [
+      git
+      git-extras
+      gh
+      google-chrome
+      spotify
+      retroarch
+      tdesktop
+      discord
+      minecraft
 
-    gsconnect
-    impatience
-    appindicator
+      gsconnect
+      impatience
+      appindicator
 
-    (vscode-with-extensions.override {
-      vscodeExtensions = with pkgs.vscode-extensions; [
-        ms-vsliveshare.vsliveshare
-      ];
-    })
-  ];
+      rnix-lsp
+      nixpkgs-fmt
+
+      (vscode-with-extensions.override {
+        vscodeExtensions =
+          (
+            with pkgs.vscode-extensions;
+            [
+              bbenoist.Nix
+              jnoortheen.nix-ide
+              matklad.rust-analyzer
+              ms-vsliveshare.vsliveshare
+            ]
+          ) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+            {
+              name = "nix-env-selector";
+              publisher = "arrterian";
+              version = "1.0.2";
+              sha256 = "a1efa383f13faa3ded2f213ff8afbc502af9e520fde78806a96d8afece30ff9a";
+            }
+          ];
+      })
+    ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
